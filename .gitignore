@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Local data / artifacts
+data/*.parquet
+*.duckdb
+local_registry.db
+
+# Env
+.env
+.env.local
+
+# Editor
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Terraform
+terraform/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
