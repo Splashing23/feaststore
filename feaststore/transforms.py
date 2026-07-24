@@ -60,9 +60,7 @@ def windowed_aggregate(
     return out
 
 
-def fill_missing(
-    df: pd.DataFrame, columns: dict[str, float | int | str]
-) -> pd.DataFrame:
+def fill_missing(df: pd.DataFrame, columns: dict[str, float | int | str]) -> pd.DataFrame:
     """Fill NaNs with explicit per-column defaults.
 
     Feature values fed to the online store should be dense; leaving NaNs turns

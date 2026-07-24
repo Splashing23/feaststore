@@ -36,17 +36,13 @@ class OfflineStore:
             self._settings.offline_dsn, future=True, pool_pre_ping=True
         )
 
-    def get_latest_rows(
-        self, view: FeatureView, cutoff: datetime | None = None
-    ) -> pd.DataFrame:
+    def get_latest_rows(self, view: FeatureView, cutoff: datetime | None = None) -> pd.DataFrame:
         """Latest row per entity as of `cutoff` (defaults to now).
 
         Uses ``DISTINCT ON`` -- a Postgres idiom that returns the first row per
         partition given an ordering, which is exactly "newest row per entity".
         """
-        cols = ", ".join(
-            [*view.join_keys, *view.feature_names(), view.timestamp_field]
-        )
+        cols = ", ".join([*view.join_keys, *view.feature_names(), view.timestamp_field])
         join_keys = ", ".join(view.join_keys)
         params: dict[str, Any] = {}
         where = ""
@@ -119,7 +115,7 @@ class OfflineStore:
             SELECT e._row_id, {select_feats}
             FROM {tmp} e
             LEFT JOIN LATERAL (
-                SELECT {', '.join(wanted_features)}
+                SELECT {", ".join(wanted_features)}
                 FROM {view.source_table} src
                 WHERE {join_cond}
                   AND src.{view.timestamp_field} <= e.{timestamp_col}

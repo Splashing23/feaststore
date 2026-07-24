@@ -70,9 +70,7 @@ def test_point_in_time_join_no_leakage(settings):
         {
             "driver_id": [1, 1, 1],
             "conv_rate": [0.1, 0.2, 0.3],
-            "event_timestamp": pd.to_datetime(
-                ["2025-01-01", "2025-01-10", "2025-01-20"]
-            ),
+            "event_timestamp": pd.to_datetime(["2025-01-01", "2025-01-10", "2025-01-20"]),
         }
     )
     with offline._engine.begin() as conn:

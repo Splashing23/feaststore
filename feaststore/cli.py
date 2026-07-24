@@ -85,8 +85,7 @@ def materialize(
     results = store.materialize(view_names=view or None)
     for r in results:
         console.print(
-            f"[green]{r.feature_view}[/]: wrote {r.rows_written} rows "
-            f"in {r.duration_seconds:.2f}s"
+            f"[green]{r.feature_view}[/]: wrote {r.rows_written} rows in {r.duration_seconds:.2f}s"
         )
 
 

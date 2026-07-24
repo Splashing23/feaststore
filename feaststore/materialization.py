@@ -56,16 +56,12 @@ class MaterializationEngine:
             )
 
         # Serialize timestamps to ISO strings for the online layer.
-        timestamps = [
-            _to_iso(v) for v in df[ts_field].tolist()
-        ]
+        timestamps = [_to_iso(v) for v in df[ts_field].tolist()]
         records = df.drop(columns=[ts_field]).to_dict(orient="records")
 
         written = self._online.write_batch(view, records, timestamps)
         duration = _monotonic_seconds() - started
-        logger.info(
-            "materialized %d rows for view %s in %.3fs", written, view.name, duration
-        )
+        logger.info("materialized %d rows for view %s in %.3fs", written, view.name, duration)
         return MaterializationResult(view.name, written, cutoff, duration)
 
     def materialize_all(
