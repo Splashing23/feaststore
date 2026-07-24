@@ -68,7 +68,9 @@ class OnlineStore:
             key = self._key(view, entity_key)
             mapping = {name: json.dumps(row.get(name)) for name in feature_names}
             mapping[_TS_FIELD] = ts
-            pipe.hset(key, mapping=mapping)
+            # redis-py types `mapping` with an invariant Mapping key union, so a
+            # plain dict[str, str] is flagged despite being valid at runtime.
+            pipe.hset(key, mapping=mapping)  # type: ignore[arg-type]
             if ttl_seconds is not None:
                 pipe.expire(key, ttl_seconds)
         pipe.execute()
