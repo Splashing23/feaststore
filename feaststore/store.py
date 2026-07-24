@@ -65,7 +65,7 @@ class FeatureStore:
         keys. Results are merged per entity row across the referenced views.
         """
         by_view = _group_feature_refs(features)
-        merged: list[dict[str, Any]] = [dict() for _ in entity_rows]
+        merged: list[dict[str, Any]] = [{} for _ in entity_rows]
 
         for view_name, feats in by_view.items():
             view = self.registry.get_feature_view(view_name)

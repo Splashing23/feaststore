@@ -31,7 +31,12 @@ def test_feature_requires_valuetype():
 
 def test_feature_view_requires_entities_and_features():
     with pytest.raises(RegistrationError):
-        FeatureView(name="v", entities=[], features=[Feature("x", ValueType.FLOAT)], source_table="t")
+        FeatureView(
+            name="v",
+            entities=[],
+            features=[Feature("x", ValueType.FLOAT)],
+            source_table="t",
+        )
     with pytest.raises(RegistrationError):
         FeatureView(name="v", entities=[Entity("e")], features=[], source_table="t")
 
